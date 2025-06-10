@@ -29,6 +29,7 @@ familiarity with the configuration and deployment of Azimuth.
 - [Configuring tenancies](#configuring-tenancies)
   - [OpenStack credential](#openstack-credential)
   - [Kubernetes credential](#kubernetes-credential)
+- [Developing locally](#developing-locally)
 
 
 ## Required tools
@@ -274,3 +275,20 @@ Update `kubeconfig-secret.yaml` as directed by the comments in the file before s
 as described above.
 
 Commit the new tenancy to the repository and allow Flux to roll it out.
+
+## Developing locally
+
+To run the GitHub Actions linters locally, use:
+
+```sh
+docker run --rm \
+    -e RUN_LOCAL=true \
+    --env-file "super-linter.env" \
+    -v "$(pwd)":/tmp/lint \
+    ghcr.io/super-linter/super-linter:v7.3.0
+```
+
+```sh
+ansible-lint -c .ansible-lint.yml
+```
+
