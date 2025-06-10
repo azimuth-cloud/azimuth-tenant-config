@@ -1,4 +1,4 @@
-# azimuth-tenant-config  <!-- omit in toc -->
+# azimuth-tenant-config <!-- omit in toc -->
 
 This repository provides a base for configuring the tenancies for an Azimuth instance that is
 using [OpenID Connect (OIDC)](https://openid.net/) authentication. This includes support for a
@@ -14,7 +14,7 @@ familiarity with the configuration and deployment of Azimuth.
 > [!WARNING]
 > OIDC authentication and "apps-only" mode are both currently in technology preview.
 
-## Contents  <!-- omit in toc -->
+## Contents <!-- omit in toc -->
 
 - [Required tools](#required-tools)
 - [Set up Azimuth configuration repository](#set-up-azimuth-configuration-repository)
@@ -22,23 +22,22 @@ familiarity with the configuration and deployment of Azimuth.
 - [Sealing secrets](#sealing-secrets)
 - [Configuring Flux](#configuring-flux)
 - [OpenID Connect (OIDC) authentication](#openid-connect-oidc-authentication)
-  - [Configuring Azimuth](#configuring-azimuth)
+  - [Configuring Azimuth OIDC](#configuring-azimuth-oidc)
 - [Apps-only mode](#apps-only-mode)
-  - [Configuring Azimuth](#configuring-azimuth-1)
+  - [Configuring Azimuth "apps-only" mode](#configuring-azimuth-apps-only-mode)
   - [Configuring app templates](#configuring-app-templates)
 - [Configuring tenancies](#configuring-tenancies)
   - [OpenStack credential](#openstack-credential)
   - [Kubernetes credential](#kubernetes-credential)
 - [Developing locally](#developing-locally)
 
-
 ## Required tools
 
 This document assumes that following tools are available:
 
-  * [kubectl](https://kubernetes.io/docs/reference/kubectl/)
-  * [Flux CLI](https://fluxcd.io/flux/cmd/)
-  * [kubeseal](https://github.com/bitnami-labs/sealed-secrets?tab=readme-ov-file#kubeseal)
+- [kubectl](https://kubernetes.io/docs/reference/kubectl/)
+- [Flux CLI](https://fluxcd.io/flux/cmd/)
+- [kubeseal](https://github.com/bitnami-labs/sealed-secrets?tab=readme-ov-file#kubeseal)
 
 ## Set up Azimuth configuration repository
 
@@ -132,7 +131,7 @@ The SOCKS proxy can then be closed down:
 
 > [!CAUTION]
 > You must **never** commit an unsealed secret file to Git.
-> 
+>
 > There are patterns in `.gitignore` that should ensure this never happens. Be sure to preserve
 > those patterns if you make changes to `.gitignore`.
 >
@@ -178,7 +177,7 @@ For more information, see
 > username `admin` and the configured admin password and create the required users, groups, etc.
 > in the `azimuth-users` realm.
 
-### Configuring Azimuth
+### Configuring Azimuth OIDC
 
 To enable OIDC authentication for Azimuth, add the following variable to your Azimuth config:
 
@@ -203,10 +202,10 @@ each tenancy will have its own Kubernetes cluster, although these could be
 [vClusters](https://www.vcluster.com/) on a single host cluster.
 
 > [!TIP]
-> 
+>
 > Management of per-tenant clusters is not in the scope of either Azimuth or this repository.
 >
-> Azimuth has no opinion on where the kubeconfigs that it uses come from as long as it is able to 
+> Azimuth has no opinion on where the kubeconfigs that it uses come from as long as it is able to
 > reach the Kubernetes API for those clusters.
 >
 > The expected pattern is to have a "workload" cluster that is separate to the Azimuth cluster
@@ -215,12 +214,12 @@ each tenancy will have its own Kubernetes cluster, although these could be
 >
 > The following repositories may be of interest when implementing this pattern:
 >
->   * [stackhpc/capi-helm-fluxcd-config](https://github.com/stackhpc/capi-helm-fluxcd-config)
->     for the host cluster, using Cluster API and OpenStack
->   * [stackhpc/vcluster-fluxcd-config](https://github.com/stackhpc/vcluster-fluxcd-config)
->     for the vClusters
+> - [stackhpc/capi-helm-fluxcd-config](https://github.com/stackhpc/capi-helm-fluxcd-config)
+>   for the host cluster, using Cluster API and OpenStack
+> - [stackhpc/vcluster-fluxcd-config](https://github.com/stackhpc/vcluster-fluxcd-config)
+>   for the vClusters
 
-### Configuring Azimuth
+### Configuring Azimuth "apps-only" mode
 
 Use following configuration can be used to enable "apps-only" mode for Azimuth:
 
@@ -231,8 +230,7 @@ Use following configuration can be used to enable "apps-only" mode for Azimuth:
 azimuth_cloud_provider_type: "null"
 ```
 
-> [!IMPORTANT]
-> `azimuth_cloud_provider_type` must be set to the **string** `"null"` rather than actual `null`.
+> [!IMPORTANT] > `azimuth_cloud_provider_type` must be set to the **string** `"null"` rather than actual `null`.
 
 ### Configuring app templates
 
@@ -291,4 +289,3 @@ docker run --rm \
 ```sh
 ansible-lint -c .ansible-lint.yml
 ```
-

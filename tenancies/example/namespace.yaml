@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  # This MUST match the namespace in the sealed secrets
+  # This MUST match the namespace in the sealed secrets
   # Make sure to prefix the namespace with az- as expected by Azimuth
   name: az-example
   labels:
