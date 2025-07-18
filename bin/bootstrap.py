@@ -9,12 +9,10 @@ parser.add_argument("--cred-file",required=True)
 parser.add_argument("--name",required=True)
 parser.add_argument("--azimuth-kubeconfig",required=True)
 parser.add_argument("--git-remote-url",required=True)
-parser.add_argument("--oidc-admin-username",required=True)
-parser.add_argument("--oidc-admin-email",required=True)
 args = parser.parse_args()
 
 base_dir = os.path.dirname(__file__)
-templates_dir = os.path.join(base_dir, "templates")
+templates_dir = os.path.join(base_dir, "templates/tenancy")
 tenancies_dir = os.path.join(base_dir, "../tenancies")
 
 with open(args.cred_file, 'r') as file:
@@ -22,9 +20,7 @@ with open(args.cred_file, 'r') as file:
 
 jinja_vars = dict(
     name=args.name,
-    cred_data=cred_data,
-    oidc_admin_username=args.oidc_admin_username,
-    oidc_admin_email=args.oidc_admin_email
+    cred_data=cred_data
 )
 
 environment = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir))
@@ -47,8 +43,8 @@ else:
     cred_secret_file = "kubeconfig-secret.yaml"
 
 for t in template_files:
-    namespace_template = environment.get_template(t)
-    content = namespace_template.render(jinja_vars)
+    template = environment.get_template(t)
+    content = template.render(jinja_vars)
     with open(os.path.join(tenancy_dir,t).replace(".j2",""), mode="w", encoding="utf-8") as outputFile:
         outputFile.write(content)
 

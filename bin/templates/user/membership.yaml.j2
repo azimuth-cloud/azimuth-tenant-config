@@ -1,0 +1,14 @@
+---
+apiVersion: user.keycloak.crossplane.io/v1alpha1
+kind: Groups
+metadata:
+  name: {{ tenancy }}-admin-group-mapping
+spec:
+  forProvider:
+    realmId: azimuth-users
+    userIdRef:
+      name: {{ tenancy }}-admin
+    groupIdsRefs:
+      - name: {{ tenancy }}
+  providerConfigRef:
+    name: keycloak-config
