@@ -30,7 +30,7 @@ if user_filename in os.listdir(users_dir):
     with open(user_filepath) as stream:
         user_stream = yaml.safe_load(stream)
     
-    if user_stream["spec"]["forProvider"]["email"] != args.oidc_admin_email:
+    if args.oidc_admin_email != None and user_stream["spec"]["forProvider"]["email"] != args.oidc_admin_email:
         print("User already exists with a different email address")
         sys.exit(1)
 
