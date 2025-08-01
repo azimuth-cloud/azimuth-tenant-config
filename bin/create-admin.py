@@ -43,7 +43,12 @@ if user_filename in os.listdir(users_dir):
         print("Already a member of that tenancy")
         os.exit(1)
     else:
-        membership_stream["spec"]["forProvider"]["groupIdsRefs"].append({"name": args.tenancy})
+        membership_stream["spec"]["forProvider"]["groupIdsRefs"].append(
+            {
+                "name": args.tenancy,
+                "resolve": "Always"
+            }
+        )
         with open(membership_filepath, mode="w", encoding="utf-8") as file:
             yaml.dump(membership_stream, file)
         print("Added "+args.oidc_admin_username+" as member of "+args.tenancy)

@@ -10,5 +10,6 @@ spec:
       name: {{ tenancy }}-admin
     groupIdsRefs:
       - name: {{ tenancy }}
+        policy: Always
   providerConfigRef:
     name: keycloak-config
