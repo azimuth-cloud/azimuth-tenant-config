@@ -81,3 +81,5 @@ else:
     with open(os.path.join(base_dir,"../users/kustomization.yaml"),'a') as resourcesFile:
         resourcesFile.write("  - ./users/"+user_filename+"\n")
         resourcesFile.write("  - ./memberships/"+user_filename+"\n")
+
+    print("Created user "+user_filename)
