@@ -10,6 +10,7 @@ spec:
       name: {{ oidc_admin_username }}
     groupIdsRefs:
       - name: {{ tenancy }}
-        policy: Always
+        policy: 
+          resolve: Always
   providerConfigRef:
     name: keycloak-config

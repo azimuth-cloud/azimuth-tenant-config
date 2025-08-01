@@ -46,7 +46,9 @@ if user_filename in os.listdir(users_dir):
         membership_stream["spec"]["forProvider"]["groupIdsRefs"].append(
             {
                 "name": args.tenancy,
-                "resolve": "Always"
+                "policy": {
+                    "resolve": "Always"
+                }
             }
         )
         with open(membership_filepath, mode="w", encoding="utf-8") as file:
