@@ -16,6 +16,7 @@ git clone \
   https://github.com/azimuth-cloud/azimuth-tenant-config.git \
   my-azimuth-tenant-config
 cd my-azimuth-tenant-config
+git checkout feat/crossplane-support
 
 # Rename the origin remote to upstream so that we can pull changes in future
 git remote rename origin upstream
