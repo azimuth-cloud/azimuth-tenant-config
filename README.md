@@ -41,22 +41,9 @@ This document assumes that following tools are available:
 
 ## Set up Azimuth configuration repository
 
-The changes for both OIDC authentication and "apps-only" mode, as well as the installation of
-the Flux CD and sealed secrets controllers on the Azimuth cluster, currently reside in a branch -
-[feat/standalone-apps](https://github.com/azimuth-cloud/azimuth-config/tree/feat/standalone-apps) -
-which you will need to merge in to your Azimuth configuration repository.
-
 First,
 [create an azimuth-config repository](https://azimuth-config.readthedocs.io/en/latest/repository/)
 for your Azimuth instance as normal.
-
-Once you have a repository with a `main` branch set up, merge in the changes from the
-`feat/standalone-apps` branch:
-
-```sh
-git remote update
-git merge upstream/feat/standalone-apps
-```
 
 Next,
 [create a new environment](https://azimuth-config.readthedocs.io/en/latest/repository/#creating-a-new-environment)

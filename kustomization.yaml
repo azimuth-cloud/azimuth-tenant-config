@@ -4,3 +4,5 @@ resources:
   # Uncomment the app templates if using apps-only mode
   # - ./apptemplates
   - ./tenancies
+  # Uncomment to enable creation of initial admin users
+  # - ./users
